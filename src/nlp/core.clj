@@ -19,9 +19,14 @@
              {:occurrences occurrences
               :num-words (count words)}))))
 
-(defn zipfs-law [f]
-
-  )
+(defn zipfs-law [s]
+  (->> (word-count s)
+       (map-indexed (fn [idx [word freq]]
+                      (let [rank (inc idx)]
+                        {:word word
+                         :freq freq
+                         :rank rank
+                         :score (* freq rank)})))))
 
 (defn collocations [f]
 
